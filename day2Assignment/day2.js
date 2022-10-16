@@ -124,18 +124,32 @@ console.log("You cannot end a sentence with because because because is a conjuct
  */
 
 // 1.
-console.log("Love is the best thing in this world. Some found their love and some are still looking for their love.".match(/love/g).length);
+console.log("Love is the best thing in this world. Some found their love and some are still looking for their love.".match(/love/gi).length);
 
 // 2.
-console.log("You cannot end a sentence with because because because is a conjuction".match(/because/g).length);
+console.log("You cannot end a sentence with because because because is a conjuction".match(/because/gi).length);
 
 // 3.
 const sentence = '%I $am@% a %tea@cher%, &and& I lo%#ve %te@a@ching%;. The@re $is no@th@ing; &as& mo@re rewarding as educa@ting &and& @emp%o@weri@ng peo@ple. ;I found tea@ching m%o@re interesting tha@n any ot#her %jo@bs. %Do@es thi%s mo@tiv#ate yo@u to be a tea@cher!? %Th#is 30#Days&OfJavaScript &is al@so $the $resu@lt of &love& of tea&ching';
 
 
-let cleanedText =sentence.replace(/%/g,'').replace(/@/g,'').replace(/#/g,'').replace(/&/g,'').replace(/\$/g,'')
+let cleanedText =sentence.replace(/%/g,'').replace(/@/g,'' ).replace(/#/g,'').replace(/&/g,'').replace(/\$/g,'')
 console.log(cleanedText);
+let words = cleanedText.match(/\w+/g);
+console.log(words);
+let store = {}
+let higherOccurence = 0;
+let item ;
+words.map(e=>{
+    const pattern = new RegExp(` ${e} `,"g")
+    const count = words.join(' ').match(pattern).length
+    console.log(count)
+    store[e]= count;
+    count > higherOccurence?( higherOccurence=count,item=e):higherOccurence=higherOccurence;
+    
+});
 
+console.log(higherOccurence,item)
 
 // 4.
 const text = 'He earns 5000 euro from salary per month, 10000 euro annual bonus, 15000 euro online courses per month.'
